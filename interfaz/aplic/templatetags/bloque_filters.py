@@ -18,3 +18,31 @@ def extraer_hora(bloque):
     if len(partes) >= 1:
         return partes[0]
     return ''
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key, [])
+
+@register.filter
+def trim(value):
+    return value.strip()
+
+@register.filter
+def lower(value):
+    return value.lower()
+
+@register.filter
+def dict_get(dictionary, key):
+    return dictionary.get(key, {})
+
+@register.filter
+def nested_get(dictionary, keys):
+    """
+    Permite acceder a dictionary[key1][key2] sin romper si alguno no existe.
+    Uso en template: {{ dict|nested_get:"key1,key2" }}
+    """
+    try:
+        key1, key2 = keys.split(',')
+        return dictionary.get(key1, {}).get(key2, [])
+    except (AttributeError, ValueError):
+        return []
