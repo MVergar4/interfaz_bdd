@@ -1,174 +1,92 @@
+{% load bloque_filters %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Citas</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #d6f0ff;
-    }
-
-    .navbar {
-      display: flex;
-      background-color: #a5caff;
-      padding: 10px 20px;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .navbar .links {
-      display: flex;
-      gap: 20px;
-    }
-
-    .navbar a {
-      text-decoration: none;
-      color: #000;
-      font-weight: bold;
-      padding: 6px 12px;
-      border-radius: 6px;
-    }
-
-    .navbar a.active,
-    .navbar a:hover {
-      background-color: #4d72b1;
-      color: white;
-    }
-
-    .navbar .profile {
-      width: 40px;
-      height: 40px;
-      background-color: #000;
-      border-radius: 50%;
-    }
-
-    .container {
-      padding: 30px 50px;
-    }
-
-    .appointment {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #e0e0e0;
-      padding: 15px 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-
-    .patient-info {
-      display: flex;
-      align-items: center;
-    }
-
-    .patient-info img {
-      width: 40px;
-      height: 40px;
-      margin-right: 15px;
-    }
-
-    .patient-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .patient-name {
-      font-weight: bold;
-    }
-
-    .appointment-time {
-      text-align: right;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Citas</title>
+    <style>
+        body {
+            background-color: #b3e5fc;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #4fc3f7;
+            display: flex;
+            padding: 15px;
+        }
+        .navbar a {
+            color: #000;
+            margin-right: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar a.active {
+            background-color: #0288d1;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .cita-card {
+            background-color: #e0e0e0;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .paciente-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .paciente-nombre {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .paciente-rut {
+            font-size: 14px;
+            color: #555;
+        }
+        .horario-info {
+            text-align: right;
+        }
+    </style>
 </head>
 <body>
-
-  <div class="navbar">
-    <div class="links">
-      <a href="#">Inicio</a>
-      <a href="/citas/" class="active">Citas</a>
-      <a href="#">Calendario</a>
-      <a href="#">Fichas clínicas</a>
-      <a href="#">Materiales</a>
-      <a href="#">Pagos</a>
+    <div class="navbar">
+        <a href="/">Inicio</a>
+        <a href="/citas/" class="active">Citas</a>
+        <a href="#">Calendario</a>
+        <a href="#">Fichas clínicas</a>
+        <a href="#">Materiales</a>
+        <a href="#">Pagos</a>
     </div>
-    <div class="profile"></div>
-  </div>
 
-  <div class="container">
-    <div class="appointment">
-      <div class="patient-info">
-        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar">
-        <div class="patient-text">
-          <div class="patient-name">Frank Gomez</div>
-          <div>22.865.231-0</div>
+    {% for cita in citas %}
+    <div class="cita-card">
+        <div class="paciente-info">
+            <div class="paciente-nombre">
+                {{ cita.id_ficha.rut_paciente.nombre|default:"-" }}
+            </div>
+            <div class="paciente-rut">
+                {{ cita.id_ficha.rut_paciente.rut_paciente|default:"-" }}
+            </div>
         </div>
-      </div>
-      <div class="appointment-time">
-        <div>Lunes 28 de febrero</div>
-        <div>10:00 - 10:30</div>
-      </div>
-    </div>
-
-    <div class="appointment">
-      <div class="patient-info">
-        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar">
-        <div class="patient-text">
-          <div class="patient-name">María Gascón</div>
-          <div>16.324.612-2</div>
+        <div class="horario-info">
+            <div>
+                Fecha: {{ cita.bloque_horario|extraer_fecha }}
+            </div>
+            <div>
+                Hora: {{ cita.bloque_horario|extraer_hora }}
+            </div>
         </div>
-      </div>
-      <div class="appointment-time">
-        <div>Miércoles 2 de marzo</div>
-        <div>14:00 - 15:00</div>
-      </div>
     </div>
-
-    <div class="appointment">
-      <div class="patient-info">
-        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar">
-        <div class="patient-text">
-          <div class="patient-name">Juan Pérez</div>
-          <div>12.183.584-4</div>
-        </div>
-      </div>
-      <div class="appointment-time">
-        <div>Viernes 4 de marzo</div>
-        <div>09:00 - 10:00</div>
-      </div>
-    </div>
-
-    <!-- Entradas vacías -->
-    <div class="appointment">
-      <div class="patient-info">
-        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar">
-        <div class="patient-text">
-          <div class="patient-name">:</div>
-          <div>:</div>
-        </div>
-      </div>
-      <div class="appointment-time">
-        <div>:</div>
-        <div>:</div>
-      </div>
-    </div>
-
-    <div class="appointment">
-      <div class="patient-info">
-        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar">
-        <div class="patient-text">
-          <div class="patient-name">:</div>
-          <div>:</div>
-        </div>
-      </div>
-      <div class="appointment-time">
-        <div>:</div>
-        <div>:</div>
-      </div>
-    </div>
-  </div>
-
+    {% empty %}
+    <p style="text-align:center; margin-top:50px;">No hay citas registradas.</p>
+    {% endfor %}
 </body>
 </html>
