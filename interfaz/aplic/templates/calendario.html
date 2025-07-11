@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calendario</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #d6f0ff;
+    }
+
+    .navbar {
+      display: flex;
+      background-color: #a5caff;
+      padding: 10px 20px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar .links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    .navbar a.active,
+    .navbar a:hover {
+      background-color: #4d72b1;
+      color: white;
+    }
+
+    .navbar .profile {
+      width: 40px;
+      height: 40px;
+      background-color: #000;
+      border-radius: 50%;
+    }
+
+    .container {
+      padding: 30px 50px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid #888;
+      text-align: center;
+      height: 50px;
+      padding: 0;
+      position: relative;
+    }
+
+    th {
+      background-color: #eeeeee;
+    }
+
+    .hora {
+      font-weight: bold;
+      background-color: #dddddd;
+      width: 80px;
+    }
+
+    .cita {
+      background-color: #92c9ff;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 5px;
+      font-size: 13px;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 4px;
+    }
+
+    .media-hora {
+      height: 50%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3px;
+      background-color: #92c9ff;
+      font-size: 13px;
+      border-radius: 4px;
+    }
+
+    .media-hora.superior {
+      top: 0;
+    }
+
+    .media-hora.inferior {
+      bottom: 0;
+    }
+
+    .colacion {
+      background-color: #ff5c5c;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="links">
+      <a href="#">Inicio</a>
+      <a href="/citas/">Citas</a>
+      <a href="/calendario/" class="active">Calendario</a>
+      <a href="#">Fichas clínicas</a>
+      <a href="#">Materiales</a>
+      <a href="#">Pagos</a>
+    </div>
+    <div class="profile"></div>
+  </div>
+
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Hora</th>
+          <th>Lunes</th>
+          <th>Martes</th>
+          <th>Miércoles</th>
+          <th>Jueves</th>
+          <th>Viernes</th>
+          <th>Sábado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="hora">09:00</td>
+          <td>
+            <div class="media-hora superior">Paciente A<br>09:00–09:30</div>
+          </td>
+          <td>
+            <div class="media-hora inferior">Paciente B<br>09:30–10:00</div>
+          </td>
+          <td></td><td></td>
+          <td><div class="cita">Juan Pérez<br>12.183.584-4</div></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="hora">10:00</td>
+          <td>
+            <div class="media-hora superior">Frank Gomez<br>10:00–10:30</div>
+          </td>
+          <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="hora">11:00</td>
+          <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="hora">12:00</td>
+          <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="hora">13:00</td>
+          <td class="colacion" colspan="6">Horario de colación</td>
+        </tr>
+        <tr>
+          <td class="hora">14:00</td>
+          <td></td><td></td>
+          <td><div class="cita">María Gascón<br>16.324.612-2</div></td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="hora">15:00</td>
+          <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="hora">16:00</td>
+          <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="hora">17:00</td>
+          <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="hora">18:00</td>
+          <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="hora">19:00</td>
+          <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="hora">20:00</td>
+          <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
